@@ -33,15 +33,14 @@ def test_clean_data_invalid_amount(spark_local):
     transformed_df = clean_data(df)
     results = transformed_df.collect()
 
-    assert len(results) == 1
+    assert len(results) == 2
     assert results[0]["order_id"] == "1001"
     assert results[0]["product"] == "laptop"
     assert results[0]["amount"] == 850.0
     assert results[0]["product"] is not None
     assert results[0]["amount_with_tax"] == (850.0 * 1.20)
-    assert len(results) == 1
-    assert results[0]["order_id"] == "1006"
-    assert results[0]["product"] == "keyboard"
-    assert results[0]["amount"] == 20.0
-    assert results[0]["product"] is not None
-    assert results[0]["amount_with_tax"] == (20.0 * 1.20)
+    assert results[1]["order_id"] == "1006"
+    assert results[1]["product"] == "keyboard"
+    assert results[1]["amount"] == 20.0
+    assert results[1]["product"] is not None
+    assert results[1]["amount_with_tax"] == (20.0 * 1.20)
